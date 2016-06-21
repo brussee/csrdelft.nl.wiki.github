@@ -42,17 +42,39 @@ Alles wat hier met `echo` of `print` wordt geprint word direct naar de output bu
 
 ```PHP
 class VoorbeeldenView extends SmartyTemplateView {
+  public function __construct($model) {
+    parent::__construct($model, 'Voorbeelden overzicht');
+  }
+
   public function view() {
     $this->smarty->assign('voorbeelden', $this->model->find());
     $this->smarty->display('voorbeelden/voorbeelden.tpl');
   }
 }
+
+class VoorbeeldView extends SmartyTemplateView {
+  public function __construct($id, $model) {
+    parent::__construct($model, 'Voorbeeld');
+    $this->id = $id;
+  }
+
+  public function view() {
+    $this->smarty->assign('voorbeeld', $this->model->get($id));
+    $this->smarty->display('voorbeelden/voorbeeld.tpl');
+  }
+}
 ```
 
+### `voorbeelden/voorbeelden.tpl`
 ```smarty
 <h1>Voorbeelden</h1>
 {foreach from=$voorbeelden item=voorbeeld}
-  <h2>{$voorbeeld->volledigeNaam()}</h2>
-  <p>{$voorbeeld->verhaal}</p>
+  <h2><a href="voorbeelden/{$voorbeeld->id}">{$voorbeeld->volledigeNaam()}</a></h2>
 {/foreach}
+```
+
+### `voorbeelden/voorbeeld.tpl`
+```smarty
+<h1>{$voorbeeld->volledigeNaam()}</h1>
+<p>{$voorbeeld->verhaal}</p>
 ```
