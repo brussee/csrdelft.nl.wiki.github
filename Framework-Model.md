@@ -52,5 +52,9 @@ Verwijder de entity uit de database.
 class VoorbeeldModel extends PersistenceModel {
   const orm = 'Voorbeeld';
   protected static $instance;
+  
+  public function get($id) {
+    return $this->retrieveByPrimaryKey(array($id));
+  }
 }
 ```
