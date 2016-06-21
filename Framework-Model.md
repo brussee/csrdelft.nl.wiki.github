@@ -8,10 +8,6 @@ De protected statische attribuut `$instance` is een verwijzijng naar de singleto
 
 ## Functies
 
-### `::getUUID($UUID)`
-
-Haalt een entity uit het model gebaseerd op primary key
-
 ### `find($criteria, $criteria_params, ...)`
 
 Zoek entities uit het model gebasseerd op criteria. 
