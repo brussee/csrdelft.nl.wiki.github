@@ -26,6 +26,7 @@ Legenda:
 | CMS                 | v | v | v | v | v | v |   | HTML |
 | Layout              | v |   |   |   |   | v | v | HTML |
 | MaalCie             | v | v |   | v |   |   | v | HTML |
+| Mededelingen        | v | v |   | v | v |   | v | HTML |
 | Menu                | v | v | v | v | v | v | v | mixed |
 | InstellingenWebstek | v | v |   | v | v |   | v | mixed |
 | Peilingen           |   |   |   |   |   |   | v | HTML |
