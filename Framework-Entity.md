@@ -1,6 +1,6 @@
 # Entity
 
-Een entity is een object die data bevat, zoals bijvoorbeeld een mededeling, een bestand, etc.
+Een entity is een object dat data bevat, zoals bijvoorbeeld een mededeling, een bestand, etc.
 
 Een entity moet de klasse PersistentEntity extenden en heeft drie verplichte protected statische variabelen. PersistentEntity bevat enkele functies, maar geen functies die broodnodig zijn. Het is natuurlijk mogelijk om functies in een entity te creeren.
 
