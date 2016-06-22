@@ -30,6 +30,9 @@ De functie die parent::performAction uitvoert moet er uiteindelijk voor zorgen d
 
 ## Voorbeeld
 ```PHP
+require_once 'model/VoorbeeldModel.class.php';
+require_once 'view/VoorbeeldView.class.php';
+
 class VoorbeeldController extends AclController {
   public function __construct($query) {
     parent::__construct($query, VoorbeeldModel::instance());
