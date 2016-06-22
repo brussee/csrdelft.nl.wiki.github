@@ -45,6 +45,8 @@ Verwijder de entity uit de database.
 ## Voorbeeld
 
 ```PHP
+require_once 'model/entity/Voorbeeld.class.php';
+
 class VoorbeeldModel extends PersistenceModel {
   const orm = 'Voorbeeld';
   protected static $instance;
