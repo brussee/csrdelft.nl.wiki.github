@@ -1,6 +1,12 @@
 # Permissies
 
-Niet iedereen kan alles overal zien. 
+Niet iedereen kan alles overal zien.
+
+Er zijn twee vormen van permissies binnen de stek, gebasseerd op 'Mandatory access control (MAC)' en 'Discretionary access control (DAC)'. Op sommige plekken wordt een permissie gedefinieerd, zoals `P_DOCS_READ`, en aan een bepaald niveau worden permissies gehangen die daarvoor relevant zijn. Zo krijgt een lid (`R_LID`) de permissie `P_DOCS_READ` en het bestuur krijgt alles wat lid ook heeft, plus nog wat meer.
+
+De andere vorm, DAC, is gebasseerd op eigenschappen van een lid, bijvoorbeeld welke commissie dit lid doet, welk lidjaar, welk geslacht, etc. Deze vorm wordt gebruikt als er specifiekere rechten nodig zijn.
+
+Over het algemeen geldt: als iets in code gezet wordt, gebruik MAC. Als iets in instellingen staat, gebruik DAC, tenzij er een MAC benaming voor bestaat. Hier moet natuurlijk een goede inschatting gemaakt worden.
 
 De volgende opties zijn mogelijk:
 (Wanneer er meer opties worden opgeven, deze scheiden met komma's. Geen spaties gebruiken.)
