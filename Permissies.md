@@ -24,8 +24,8 @@ Een paar voorbeelden (de namen en de toewijzing van permissies zijn inmiddels ge
  * `P_FORUM_POST` - Berichten plaatsen op het forum en eigen berichten wijzigen
  * `P_FORUM_MOD` - Forum-moderator mag berichten van anderen wijzigen of verwijderen
  * `P_DOCS_READ` - Documenten-rubriek lezen
- * `P_DOCS_POST` - Documenten verwijderen of erbij plaatsen
- * `P_DOCS_MOD` - euh???
+ * `P_DOCS_POST` - _Ongebruikt_
+ * `P_DOCS_MOD` - Documenten verwijderen of plaatsen
  * etc, etc..
 Sommige van deze permissies zijn zelfstandig. Sommige zijn cumulatief, zie code voor details.
 
