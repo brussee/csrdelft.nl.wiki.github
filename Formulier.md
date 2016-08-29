@@ -6,45 +6,121 @@ Formulier is een klasse die gebruikt kan worden om formulieren op te bouwen en t
 
 Velden zijn te vinden in `FormElement.abstract.php`, `FormKnoppen.class.php`, `GetalVelden.class.php`, `InvoerVelden.class.php`, `KeuzeVelden.class.php` en `UploadVelden.class.php`.
 
-<table>
-<tr>
-  <th>Veld</th>
-  <th>Invoer</th>
-  <th>Beschrijving</th>
-  <th>Voorbeeld</th>
-</tr>
-<tr>
-  <th colspan="4">FormElement</th>
-</tr>
-<tr>
-  <td>HtmlComment</td>
-  <td>$comment</td>
-  <td>Schrijft ingevoerde HTML direct naar output</td>
-  <td><code>new HtmlComment('&lt;p&gt;Dit formulier gaat je leven verder helpen.&lt;/p&gt;');</code></td>
-</tr>
-<tr>
-  <td>HtmlBbComment</td>
-  <td>$comment</td>
-  <td>Schrijf ingevoerde HTML via de BB parser naar output</td>
-  <td><code>new HtmlBbComment('[b]Belangrijk[/b]');</code></td>
-</tr>
-<tr>
-  <td>FieldSet</td>
-  <td>$comment</td>
-  <td>Maak een nieuwe fieldset aan met $comment als titel, de FieldSet moet nog wel gesloten worden met &lt;/fieldset&gt;</td>
-  <td><code>new FieldSet('Stuff');</code></td>
-</tr>
-<tr>
-  <td>SubKopje</td>
-  <td>$comment</td>
-  <td>Maak een subkopje aan, de standaard is h3. De eigenschap $h is publiek.</td>
-  <td><code>$s = new SubKopje('Vier'); $s->h = 4;</code></td>
-</tr>
-<tr>
-  <td>CollapsableSubKopje</td>
-  <td>$id, $titel, $collapsed = false, $single = false, $hover_click = false, $animate = true</td>
-  <td>Zelfde als subkopje, maar bij klik verschijnt/verdwijnt alles tot 
-</table>
+### FormElement
+
+#### HtmlComment
+
+Een stuk losse HTML in het formulier.
+
+| `$comment` | De HTML |
+|----------|---------|
+
+```php
+$fields[] = new HtmlComment('<strong>Dit gedeelte is belangrijk</strong>');
+```
+
+#### HtmlBbComment
+
+Een stuk losse HTML met mogelijke BBCode in het formulier
+
+| `$comment` | De HTML |
+|------------|---------|
+
+```php
+$fields[] = new HtmlBbComment('[b]Dit gedeelte is belangrijk[/b]');
+```
+
+#### FieldSet
+
+Het begin van een nieuwe fieldset, alle volgende elementen zitten in deze FieldSet, totdat een veld `new HtmlComment('</fieldset>');` volgt.
+
+| `$titel` | De titel van de fieldset |
+|----------|--------------------------|
+
+```php
+$fields[] = new FieldSet('Adres');
+...
+$fields[] = new HtmlComment('</fieldset>');
+```
+
+#### SubKopje
+
+Maak een subkopje aan, de standaard is `<h3>`. De eigenschap `$h` kan gebruikt worden om dit aan te passen.
+
+| `$tekst` | De inhoud van de titel |
+|----------|------------------------|
+
+```php
+$subkopje = new SubKopje('Persoonlijke gegevens');
+$subkopje->h = 2;
+$fields[] = $subkopje;
+```
+
+#### CollapsableSubKopje
+
+Maak een Subkopje met alles eronder collapsable, moet afgesloten worden met `new HtmlComment('</div>');`
+
+|||
+|---|---|
+| `$id`                   | De id gebruikt in de JavaScript |
+| `$titel`                | De titel van het kopje |
+| `$collapsed = false`    | Of het subkopje collapsed is bij laden |
+| `$single = false`       | Of andere kopjes ook ingeklapt moeten worden |
+| `$hover_click = false ` | Of het kopje moet uitklappen bij hover |
+| `$animate = true`       | Of het uitklappen geanimeerd moet zijn |
+
+```php
+$fields[] = new CollapsableSubKopje('optioneel', 'Optionele gegevens', true);
+...
+$fields[] = new HtmlComment('</div>');
+```
+
+### InvoerVelden
+
+#### (Required)TextField
+
+Een normaal `<input type="text".../>` veld.
+
+|||
+|---|---|
+| `$name`          | Naam van de input, gebruikt om waarde op te halen met POST |
+| `$value`         | Waarde van de input |
+| `$description`   | Beschrijving, bij mouse-over |
+| `$max_len = 255` | Maximale lengte van de input |
+| `$min_len = 0`   | Minimale lengte van de input |
+| `$model = null`  | _Ongebruikt_ |
+
+```php
+$fields[] = new TextField('voornaam', 'Voornaam', 'Vul hier je voornaam in', 255, 2);
+$fields[] = new RequiredTextField('achternaam', 'Achternaam', 'Vul hier je achternaam in', 255, 2);
+```
+
+#### (Required)FileNameField
+
+Zie [TextField](#requiredtextfield), valideert of een TextField een geldige bestandsnaam bevat.
+
+```php
+$fields[] = new FileNameField('foto', 'Foto', 'Geef de foto een naam');
+$fields[] = new RequiredFileNameField('album', 'Album', 'Geef een albumnaam');
+```
+
+#### (Required)LandField
+
+Zie [TextField(#requiredtextfield), geeft suggesties voor landen: 'Nederland', 'België', 'Duitsland', 'Frankrijk', 'Verenigd Koninkrijk', 'Verenigde Staten'.
+
+```php
+$fields[] = new LandField('geboorteland', 'Geboorteland', '');
+$fields[] = new RequiredLandField('land', 'Land', '');
+```
+
+#### (Required)RechtenField
+
+Zie [TextField](#requiredtextfield), geeft suggesties voor specifieke rechtengroepen en valideert deze.
+
+```php
+$fields[] = new RechtenField('maglezen', 'Mag lezen', '');
+$fields[] = new RequiredRechtenField('magschrijven', 'Mag schrijven', '');
+```
 
 
 |HtmlComment | $html | |
