@@ -128,10 +128,10 @@ Zie [TextField](#requiredtextfield), geeft suggesties voor leden. Opties zijn 'l
 
 |||
 |---|---|
-| `$name`                | Naam van de input |
-| `$value`               | Beginwaarde van de input |
-| `$description`         | Beschrijving, bij mouse-voer |
-| `$zoekin = 'alleleden' | Groep om in te zoeken |
+| `$name`                 | Naam van de input |
+| `$value`                | Beginwaarde van de input |
+| `$description`          | Beschrijving, bij mouse-voer |
+| `$zoekin = 'alleleden'` | Groep om in te zoeken |
 
 ```php
 $fields[] = new LidField('lid', 'Lid', '');
