@@ -106,7 +106,7 @@ $fields[] = new RequiredFileNameField('album', 'Album', 'Geef een albumnaam');
 
 #### (Required)LandField
 
-Zie [TextField(#requiredtextfield), geeft suggesties voor landen: 'Nederland', 'België', 'Duitsland', 'Frankrijk', 'Verenigd Koninkrijk', 'Verenigde Staten'.
+Zie [TextField](#requiredtextfield), geeft suggesties voor landen: 'Nederland', 'België', 'Duitsland', 'Frankrijk', 'Verenigd Koninkrijk', 'Verenigde Staten'.
 
 ```php
 $fields[] = new LandField('geboorteland', 'Geboorteland', '');
@@ -122,6 +122,21 @@ $fields[] = new RechtenField('maglezen', 'Mag lezen', '');
 $fields[] = new RequiredRechtenField('magschrijven', 'Mag schrijven', '');
 ```
 
+#### (Required)LidField
+
+Zie [TextField](#requiredtextfield), geeft suggesties voor leden. Opties zijn 'leden', 'oudleden', 'novieten', 'alleleden', 'allepersonen', 'nobodies'.
+
+|||
+|---|---|
+| `$name`                | Naam van de input |
+| `$value`               | Beginwaarde van de input |
+| `$description`         | Beschrijving, bij mouse-voer |
+| `$zoekin = 'alleleden' | Groep om in te zoeken |
+
+```php
+$fields[] = new LidField('lid', 'Lid', '');
+$fields[] = new RequiredLidField('noviet', 'Noviet', '', 'novieten');
+``` 
 
 |HtmlComment | $html | |
 |HtmlBbComment
