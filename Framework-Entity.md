@@ -2,7 +2,7 @@
 
 Een entity is een object dat data bevat, zoals bijvoorbeeld een mededeling, een bestand, etc.
 
-Een entity moet de klasse PersistentEntity extenden en heeft drie verplichte protected statische variabelen. PersistentEntity bevat enkele functies, maar geen functies die broodnodig zijn. Het is natuurlijk mogelijk om functies in een entity te creeren.
+Een entity die je in de database wilt opslaan moet de klasse PersistentEntity extenden en heeft drie verplichte protected statische variabelen. PersistentEntity mag alleen functies bevatten die relevant zijn voor dit ene object, business logic voor meerdere entities tegelijkertijd moeten in PersistenceModel, vandaar ook de enkelvoud vs. meervoud namen.
 
 ## Variabelen
 
