@@ -10,9 +10,9 @@ Er zijn twee smaakjes controller in het framework, de `AclController` en de `Con
 
 De query variabele bevat alle data van de opgevraagde url, deze moet doorgespeeld worden naar `parent::__construct`, samen met de model die gebruikt wordt. De eerste regel van `__construct` is dus altijd in de vorm `parent::__construct($query, EenSoortModel::instance());`
 
-Hierna wordt de acl (Acces Control List) ingesteld, hier wordt per functie van de controller aangegeven wie het mag doen. Dit is een ingewikkeld process (zie AccessModel.class.php). De woorden in `AccessModel->permissions` kunnen worden gebruikt (AccessModel.class.php vanaf regel 281).
+Hierna wordt de acl (Acces Control List) ingesteld, hier wordt per functie van de controller aangegeven wie het mag doen. Dit is een ingewikkeld process (zie AccessModel.class.php). De woorden in `AccessModel->permissions` kunnen worden gebruikt (AccessModel.class.php vanaf regel 281), maar ook groepen zoals commissie:PubCie en rollen binnen een groep zoals bestuur:fiscus of zelfs groepstatus zoals commissie:soccie:ot en nog veel meer.
 
-Deze acl is een array met als key de functie in controller en als waarde de permissie die nodig is en wordt opgeslagen in `$this->acl`. `$this->isPosted()` is handig om te kijken of de request een post request is, op deze manier kan 1 pagina opslaan en bekijken tegelijk, waarbij voor opslaan andere rechten nodig zijn.
+Deze acl is een array met als key de functie in controller en als waarde de permissie die nodig is en wordt opgeslagen in `$this->acl`. `$this->getRequestMethod() === 'POST'` is handig om te kijken of de request een post request is, op deze manier kan 1 pagina opslaan en bekijken tegelijk, waarbij voor opslaan andere rechten nodig zijn.
 
 Als een doel niet in acl gevonden wordt, wordt een 404 pagina aan de eindgebruiker gepresenteerd.
 
@@ -22,11 +22,11 @@ Dit is de functie die door de controller aangeroepen wordt en kan worden gebruik
 
 Aan het eind moet `parent::performAction(array)` uitgevoerd worden, deze zorgt ervoor dat de functie in `$this->action` uitgevoerd wordt met de waarden die aan de parent worden meegegeven.
 
-Functies die in performAction te gebruiken zijn om de parameters te bekijken zijn `$this->getParam($key)` en `$this->getParams($num)`, om respectievelijk de `$key`de parameter op te vragen of alle parameters na `$num` op te vragen.
+Functies die in performAction te gebruiken zijn om de parameters te bekijken zijn `$this->getParam($key)` en `$this->getParams($num)`, om respectievelijk de `$key`de parameter op te vragen (named: KVP of positional: REST) of alle parameters na `$num` op te vragen (let op de s in getParams).
 
 ### Verzin je functie
 
-De functie die parent::performAction uitvoert moet er uiteindelijk voor zorgen dat `$this->view` een view bevat, deze wordt dan uiteindelijk gerendered.
+De functie die parent::performAction uitvoert moet er uiteindelijk voor zorgen dat `$this->view` een view bevat, deze wordt dan uiteindelijk gerendered met `$view->view()` door index.php.
 
 ## Voorbeeld
 ```PHP
@@ -50,18 +50,18 @@ class VoorbeeldController extends AclController {
     $this->action = 'lijst';
     if ($this->hasParam(1)) {
       $this->action = 'bekijken';
-      $args = $this->getParam(1);
+      $args = $this->getParams(1);
     }
     $body = parent::performAction($args);
     $this->view = new CsrLayoutPage($body);
   }
 
   public function lijst() {
-    return new VoorbeeldenView($this->model);
+    return new VoorbeeldenView($this->model->find());
   }
 
   public function bekijken($id) {
-    return new VoorbeeldView($id, $this->model);
+    return new VoorbeeldView($this->model->get($id));
   }
 }
 ```
