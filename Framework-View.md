@@ -1,6 +1,8 @@
 # View
 
-Een view is een _implementatie_ van View, een view krijgt een [Model](Framework-Model) toegeworpen en laat deze zien. In principe gebruikt een view slechts wat hij krijgt van de controller en niets anders, op sommige plekken is dit helaas niet mogelijk.
+Een view is een _implementatie_ van View, een view krijgt een [Model](Framework-Model) toegeworpen en laat deze zien. In principe toont een view slechts het model wat hij meekrijgt van de controller en niets anders, maar op sommige plekken is dit helaas niet netjes gedaan ('Business Logic' moet in Model, niet in View of Controller).
+Dit model kan vanalles zijn, arrays, entities, etc.
+Tip: maak niet de keuze om hier PersistenceModel in te stoppen want dan ga je al snel business logic in de view stoppen!
 
 Als er voor wordt gekozen om `SmartyTemplateView` te extenden hoeft alleen `view()` geimplementeerd te worden en kan smarty gebruikt worden, dit is aanbevolen.
 
@@ -42,24 +44,23 @@ Alles wat hier met `echo` of `print` wordt geprint word direct naar de output bu
 
 ```PHP
 class VoorbeeldenView extends SmartyTemplateView {
-  public function __construct($model) {
+  public function __construct(array $model) {
     parent::__construct($model, 'Voorbeelden overzicht');
   }
 
   public function view() {
-    $this->smarty->assign('voorbeelden', $this->model->find());
+    $this->smarty->assign('voorbeelden', $this->model);
     $this->smarty->display('voorbeelden/voorbeelden.tpl');
   }
 }
 
 class VoorbeeldView extends SmartyTemplateView {
-  public function __construct($id, $model) {
+  public function __construct(Entity $model) {
     parent::__construct($model, 'Voorbeeld');
-    $this->id = $id;
   }
 
   public function view() {
-    $this->smarty->assign('voorbeeld', $this->model->get($id));
+    $this->smarty->assign('voorbeeld', $this->model);
     $this->smarty->display('voorbeelden/voorbeeld.tpl');
   }
 }
