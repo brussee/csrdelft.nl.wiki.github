@@ -25,6 +25,7 @@ Legenda:
 | FotoAlbum           | v | v | v | v | v | v | v | mixed |
 | CMS                 | v | v | v | v | v | v |   | HTML |
 | Layout              | v |   |   |   |   | v | v | HTML |
+| SocCie              |   |   |   |   |   |   |   | mixed |
 | MaalCie             | v | v |   | v |   |   | v | HTML |
 | Mededelingen        | v | v |   | v | v |   | v | HTML |
 | Menu                | v | v | v | v | v | v | v | mixed |
